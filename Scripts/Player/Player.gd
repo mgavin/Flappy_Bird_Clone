@@ -21,10 +21,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	force_on_player += delta * _Gravity
-	if Input.is_action_just_pressed("Player_Jump") and is_Falling():
+	if Input.is_action_just_pressed("Player_Jump"): # and is_Falling():
 		force_on_player.y = -Jump_Speed
-	pPos = get_position()
+	
 	force_on_player = move_and_slide(force_on_player)
+	
+	pPos = get_position()
+	pPos.x = max(0, min(get_viewport_rect().size.x, pPos.x))
+	pPos.y = max(0, min(get_viewport_rect().size.y, pPos.y))
+	set_position(pPos)
 
 func _on_Tracker_body_exited(body):
 	#TODO
