@@ -13,7 +13,8 @@ func _ready():
 	set_physics_process(false)
 
 func _process(delta):
-	if Input.is_action_just_pressed("Player_Jump"):
+	#if Input.is_action_just_pressed("Player_Jump"):
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		set_physics_process(true)
 		get_parent().get_node("Spawn")._on_Timer_timeout()
 		get_parent().get_node("Spawn").start()
@@ -21,7 +22,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	force_on_player += delta * _Gravity
-	if Input.is_action_just_pressed("Player_Jump"): # and is_Falling():
+	#if Input.is_action_just_pressed("Player_Jump"): # and is_Falling():
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		force_on_player.y = -Jump_Speed
 	
 	force_on_player = move_and_slide(force_on_player)
